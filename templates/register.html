@@ -1,0 +1,242 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="Site keywords here">
+    <meta name="description" content="">
+    <meta name='copyright' content=''>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title> CareCentral - Free Medical and Doctor Directory HTML Template.</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icofont.css') }}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl-carousel.css') }}">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker.css') }}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+    <!-- Additional Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+
+<body>
+
+    <!-- Header Area -->
+    <header class="header">
+        <!-- Topbar -->
+        			<!-- Topbar -->
+			<div class="topbar">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 col-md-5 col-12">
+							<!-- Contact -->
+							<ul class="top-link">
+								<li>
+                                    {% if 'username' in session %}
+                                    <div class="dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Welcome, {{ session['username'] }}
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                            <a class="dropdown-item" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                            <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                                        </div>
+                                    </div>
+                                    {% endif %}	
+                                </li>
+
+							</ul> 
+							<!-- End Contact -->
+						</div>
+                        <div class="col-lg-6 col-md-7 col-12">
+                            <!-- Top Contact -->
+                            <div class="dropdown">
+                                <ul class="top-contact">
+                                    <li>
+                                        <i class="fa fa-user-circle-o fa-2x" aria-hidden="true" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                            <a class="dropdown-item" href="/login">Login</a>
+                                            <a class="dropdown-item" href="/register">Register</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Top Contact -->
+                        </div>
+                        
+					</div>
+				</div>
+			</div>
+			<!-- End Topbar -->
+        <!-- End Topbar -->
+        <!-- Header Inner -->
+        <div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <!-- Start Logo -->
+                            <div class="logo">
+                                <a href="/">
+                                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="#">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                            <!-- Mobile Nav -->
+                            <div class="mobile-nav"></div>
+                            <!-- End Mobile Nav -->
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <!-- Main Menu -->
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/#services">Services </a></li>
+                                        <li><a href="/#About">About Us</a></li>
+                                        <li><a href="/#Contact">Contact Us</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!--/ End Main Menu -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ End Header Inner -->
+    </header>
+    <!-- End Header Area -->
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card shadow-lg p-3 mb-5 bg-white rounded" style = "border: 2px solid black">
+					<div class="card-body">
+						<h1 class="card-title text-center mb-4">Create an Account on CareCentral</h1>
+						<form action="{{ url_for('register') }}" method="POST" class="needs-validation" novalidate>
+							<!-- Registration form fields -->
+							<!-- Username field -->
+							<div class="form-group">
+								<label for="username">Username:</label>
+								<input type="text" class="form-control" id="username" name="username" required>
+								<div class="invalid-feedback">Please provide a username.</div>
+							</div>
+							<!-- Email field -->
+							<div class="form-group">
+								<label for="email">Email:</label>
+								<input type="email" class="form-control" id="email" name="email" required>
+								<div class="invalid-feedback">Please provide a valid email.</div>
+							</div>
+							<!-- Password field -->
+							<div class="form-group">
+								<label for="password">Password:</label>
+								<input type="password" class="form-control" id="password" name="password" required>
+								<div class="invalid-feedback">Please provide a password.</div>
+							</div>
+							<!-- Confirm password field -->
+							<div class="form-group">
+								<label for="confirm_password">Confirm Password:</label>
+								<input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+								<div class="invalid-feedback">Please confirm your password.</div>
+							</div>
+							<!-- Register button -->
+							<button type="submit" class="btn btn-primary btn-block">Register</button>
+						</form>
+						<p class="mt-3 text-center">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+
+    {% block content %}{% endblock %}
+
+    <!-- jquery Min JS -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- jquery Migrate JS -->
+    <script src="{{ url_for('static', filename='js/jquery-migrate-3.0.0.js') }}"></script>
+    <!-- jquery Ui JS -->
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <!-- Easing JS -->
+    <script src="{{ url_for('static', filename='js/easing.js') }}"></script>
+    <!-- Color JS -->
+    <script src="{{ url_for('static', filename='js/colors.js') }}"></script>
+    <!-- Popper JS -->
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap-datepicker.js') }}"></script>
+    <!-- Jquery Nav JS -->
+    <script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+    <!-- Slicknav JS -->
+    <script src="{{ url_for('static', filename='js/slicknav.min.js') }}"></script>
+    <!-- ScrollUp JS -->
+    <script src="{{ url_for('static', filename='js/jquery.scrollUp.min.js') }}"></script>
+    <!-- Niceselect JS -->
+    <script src="{{ url_for('static', filename='js/niceselect.js') }}"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="{{ url_for('static', filename='js/tilt.jquery.min.js') }}"></script>
+    <!-- Owl Carousel JS -->
+    <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
+    <!-- counterup JS -->
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <!-- Steller JS -->
+    <script src="{{ url_for('static', filename='js/steller.js') }}"></script>
+    <!-- Wow JS -->
+    <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+    <!-- Magnific Popup JS -->
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	<script>
+        // Function to open the login modal
+        function openLoginModal() {
+            {% if 'user_id' in session %}
+            window.location.href = "{{ url_for('appointment') }}";
+            {% else %}
+            $('#loginModal').modal('show');
+            {% endif %}
+        }
+
+    </script>
+
+
+</body>
+
+</html>

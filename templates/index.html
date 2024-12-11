@@ -1,0 +1,900 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="Site keywords here">
+    <meta name="description" content="">
+    <meta name='copyright' content=''>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>CareCentral - Free Medical and Doctor Directory HTML Template.</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icofont.css') }}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl-carousel.css') }}">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker.css') }}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+    <!-- Additional Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+
+<body>
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('login') }}" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                    <hr>
+                    <div class="text-center">
+                        <p>Don't have an account? <a href="{{ url_for('register') }}">Create an account</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Area -->
+    <header class="header">
+			<!-- Topbar -->
+			<div class="topbar">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 col-md-5 col-12">
+							<!-- Contact -->
+							<ul class="top-link">
+                                <li>
+                                    {% if 'username' in session %}
+                                        {% if session['username'] == 'CareCentral' %}
+                                        <div class="dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Welcome, {{ session['username'] }}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                                <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                                                <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                            <div class="dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Welcome, {{ session['username'] }}
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                                    <a class="dropdown-item" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                                    <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}    
+                                </li>                                                               
+							</ul> 
+							<!-- End Contact -->
+						</div>
+                        <div class="col-lg-6 col-md-7 col-12">
+                            <!-- Top Contact -->
+                            <div class="dropdown">
+                                <ul class="top-contact">
+                                    <li>
+                                        <i class="fa fa-user-circle-o fa-2x" aria-hidden="true" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                            <a class="dropdown-item" href="/login">Login</a>
+                                            <a class="dropdown-item" href="/register">Register</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Top Contact -->
+                        </div>
+                        
+					</div>
+				</div>
+			</div>
+			<!-- End Topbar -->
+
+            <!-- Header Inner -->
+			<div class="header-inner">
+				<div class="container">
+					<div class="inner">
+						<div class="row">
+							<div class="col-lg-3 col-md-3 col-12">
+								<!-- Start Logo -->
+                                <div class="logo">
+                                    <a href="/">
+                                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="#">
+                                    </a>
+                                </div>
+								<!-- End Logo -->
+								<!-- Mobile Nav -->
+								<div class="mobile-nav"></div>
+								<!-- End Mobile Nav -->
+							</div>
+							<div class="col-lg-7 col-md-9 col-12">
+								<!-- Main Menu -->
+								<div class="main-menu">
+									<nav class="navigation">
+										<ul class="nav menu">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#Contact">Contact Us</a></li>
+                                            <li><a href="#About">About Us</a></li>
+                                            <li><a href="#services">Services </a></li>
+										</ul>
+									</nav>
+								</div>
+								<!--/ End Main Menu -->
+							</div>
+                            <div class="col-lg-2 col-12">
+                                <div class="get-quote">
+                                    <a style="height: 50px; padding-top: 10px; margin: 10px; text-align: center;"
+                                        href="{% if 'user_id' in session %}{{ url_for('appointment') }}{% else %}#{% endif %}"
+                                        class="btn btn-primary"
+                                        onclick="{% if 'user_id' not in session %}openLoginModal(){% endif %}">Book
+                                        Appointment</a>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!--/ End Header Inner -->
+    </header>
+    <!-- End Header Area -->
+
+    <!-- Slider Area -->
+    <section class="slider">
+        <div class="hero-slider">
+            <!-- Start Single Slider -->
+            <div class="single-slider"
+                style="background-image: url('{{ url_for('static', filename='img/slider.jpg') }}');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="text">
+                                <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
+                                <p>Empowering health, one click at a time. Welcome to your digital gateway to wellness
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Single Slider -->
+            <!-- Start Single Slider -->
+            <div class="single-slider"
+                style="background-image:url('{{ url_for('static', filename='img/slider2.jpg') }}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="text">
+                                <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
+                                <p>Your journey to better health starts here. Explore, discover, and transform with us
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start End Slider -->
+            <!-- Start Single Slider -->
+            <div class="single-slider"
+                style="background-image:url('{{ url_for('static', filename='img/slider3.jpg') }}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="text">
+                                <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
+                                <p>Navigate the path to optimal health with confidence. Your wellness destination
+                                    awaits.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Single Slider -->
+        </div>
+    </section>
+    <!--/ End Slider Area -->
+
+    <!-- Start Schedule Area -->
+    <section class="schedule">
+        <div class="container">
+            <div class="schedule-inner">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12 ">
+                        <!-- single-schedule -->
+                        <div class="single-schedule first">
+                            <div class="inner">
+                                <div class="icon">
+                                    <i class="fa fa-ambulance"></i>
+                                </div>
+                                <div class="single-content">
+                                    <h4>Emergency Cases</h4>
+                                    <p>Urgent care, instant peace of mind. Our digital platform connects you to help
+                                        when every second counts</p>
+                                    <a href="#">LEARN MORE<i class="fa fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- single-schedule -->
+                        <div class="single-schedule middle">
+                            <div class="inner">
+                                <div class="icon">
+                                    <i class="icofont-prescription"></i>
+                                </div>
+                                <div class="single-content">
+                                    <h4>Doctors Timetable</h4>
+                                    <p>Stay in sync with your doctor's schedule effortlessly. Our platform lets you book
+                                        appointments at your convenience.</p>
+                                    <a href="#">LEARN MORE<i class="fa fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <!-- single-schedule -->
+                        <div class="single-schedule last">
+                            <div class="inner">
+                                <div class="icon">
+                                    <i class="icofont-ui-clock"></i>
+                                </div>
+                                <div class="single-content">
+                                    <h4>Opening Hours</h4>
+                                    <ul class="time-sidual">
+                                        <li class="day">Monday - Friday <span>08.00 - 20.00</span></li>
+                                        <li class="day">Saturday <span>08:00 - 20:00</span></li>
+                                        <li class="day">Monday - Thursday <span>08:00 - 20:00</span></li>
+                                    </ul>
+                                    <a href="#">LEARN MORE<i class="fa fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/End Start schedule Area -->
+
+    <!-- Start Feautes -->
+    <section class="Feautes section" id="About">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>We Are Always Ready to Help You & Your Family</h2>
+                        <img src="{{ url_for('static', filename='img/section-img.png') }}" alt="#">
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-12">
+                    <!-- Start Single features -->
+                    <div class="single-features">
+                        <div class="signle-icon">
+                            <i class="icofont icofont-ambulance-cross"></i>
+                        </div>
+                        <h3>Emergency Help</h3>
+                        <p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+                    </div>
+                    <!-- End Single features -->
+                </div>
+                <div class="col-lg-4 col-12">
+                    <!-- Start Single features -->
+                    <div class="single-features">
+                        <div class="signle-icon">
+                            <i class="icofont icofont-medical-sign-alt"></i>
+                        </div>
+                        <h3>Enriched Pharmecy</h3>
+                        <p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+                    </div>
+                    <!-- End Single features -->
+                </div>
+                <div class="col-lg-4 col-12">
+                    <!-- Start Single features -->
+                    <div class="single-features last">
+                        <div class="signle-icon">
+                            <i class="icofont icofont-stethoscope"></i>
+                        </div>
+                        <h3>Medical Treatment</h3>
+                        <p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+                    </div>
+                    <!-- End Single features -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Feautes -->
+
+    <!-- Start Fun-facts -->
+    <div id="fun-facts" class="fun-facts section overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Fun -->
+                    <div class="single-fun">
+                        <i class="icofont icofont-home"></i>
+                        <div class="content">
+                            <span class="counter">50</span>
+                            <p>Hospital Rooms</p>
+                        </div>
+                    </div>
+                    <!-- End Single Fun -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Fun -->
+                    <div class="single-fun">
+                        <i class="icofont icofont-user-alt-3"></i>
+                        <div class="content">
+                            <span class="counter">10</span>
+                            <p>Specialist Doctors</p>
+                        </div>
+                    </div>
+                    <!-- End Single Fun -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Fun -->
+                    <div class="single-fun">
+                        <i class="icofont-simple-smile"></i>
+                        <div class="content">
+                            <span class="counter">4379</span>
+                            <p>Happy Patients</p>
+                        </div>
+                    </div>
+                    <!-- End Single Fun -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Fun -->
+                    <div class="single-fun">
+                        <i class="icofont icofont-table"></i>
+                        <div class="content">
+                            <span class="counter">32</span>
+                            <p>Years of Experience</p>
+                        </div>
+                    </div>
+                    <!-- End Single Fun -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Fun-facts -->
+
+    <!-- Start Why choose -->
+    <section class="why-choose section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>We Offer Different Services To Improve Your Health</h2>
+                        <img src="{{ url_for('static', filename='img/section-img.png') }}" alt="#">
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <!-- Start Choose Left -->
+                    <div class="choose-left">
+                        <h3>Who We Are</h3>
+                        <p>Welcome to CareCentral, your one-stop destination for comprehensive healthcare. With a
+                            dedicated team of experts and state-of-the-art facilities, we offer a wide range of services
+                            to meet all your healthcare needs. From preventive care to specialized treatments, trust us
+                            to provide personalized, high-quality care that prioritizes your well-being."</p>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list">
+                                    <li><i class="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
+                                    <li><i class="fa fa-caret-right"></i>Duis massa massa.</li>
+                                    <li><i class="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list">
+                                    <li><i class="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
+                                    <li><i class="fa fa-caret-right"></i>Duis massa massa.</li>
+                                    <li><i class="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Choose Left -->
+                </div>
+                <div class="col-lg-6 col-12">
+                    <!-- Start Choose Rights -->
+                    <div class="choose-right">
+                        <div class="video-image">
+                            <!-- Video Animation -->
+                            <div class="promo-video">
+                                <div class="waves-block">
+                                    <div class="waves wave-1"></div>
+                                    <div class="waves wave-2"></div>
+                                    <div class="waves wave-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Choose Rights -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Why choose -->
+
+    <!-- Start Call to action -->
+    <section class="call-action overlay" data-stellar-background-ratio="0.5" id="Contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="content">
+                        <h2>Do you need Emergency Medical Care? Call @ 1234 56789</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor dictum turpis nec
+                            gravida.</p>
+                        <div class="button">
+                            <a href="#" class="btn">Contact Now</a>
+                            <a href="#" class="btn second">Learn More<i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Call to action -->
+
+    <!-- Start service -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>We Offer Different Services To Improve Your Health</h2>
+                        <img src="{{ url_for('static', filename='img/section-img.png') }}" alt="#">
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Service -->
+                    <div class="single-service">
+                        <i class="icofont icofont-prescription"></i>
+                        <h4><a href="service-details.html">General Treatment</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut
+                            imperdiet. </p>
+                    </div>
+                    <!-- End Single Service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Service -->
+                    <div class="single-service">
+                        <i class="icofont icofont-tooth"></i>
+                        <h4><a href="service-details.html">Teeth Whitening</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut
+                            imperdiet. </p>
+                    </div>
+                    <!-- End Single Service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Service -->
+                    <div class="single-service">
+                        <i class="icofont icofont-heart-alt"></i>
+                        <h4><a href="service-details.html">Heart Surgery</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut
+                            imperdiet. </p>
+                    </div>
+                    <!-- End Single Service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Service -->
+                    <div class="single-service">
+                        <i class="icofont icofont-listening"></i>
+                        <h4><a href="service-details.html">Ear Treatment</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut
+                            imperdiet. </p>
+                    </div>
+                    <!-- End Single Service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Service -->
+                    <div class="single-service">
+                        <i class="icofont icofont-eye-alt"></i>
+                        <h4><a href="service-details.html">Vision Problems</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut
+                            imperdiet. </p>
+                    </div>
+                    <!-- End Single Service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Service -->
+                    <div class="single-service">
+                        <i class="icofont icofont-blood"></i>
+                        <h4><a href="service-details.html">Blood Transfusion</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut
+                            imperdiet. </p>
+                    </div>
+                    <!-- End Single Service -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End service -->
+
+    <!-- Pricing Table -->
+    <section class="pricing-table section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>We Provide You The Best Treatment In Resonable Price</h2>
+                        <img src="{{ url_for('static', filename='img/section-img.png') }}" alt="#">
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Table -->
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="single-table">
+                        <!-- Table Head -->
+                        <div class="table-head">
+                            <div class="icon">
+                                <i class="icofont icofont-ui-cut"></i>
+                            </div>
+                            <h4 class="title">Plastic Suggery</h4>
+                            <div class="price">
+                                <p class="amount">$199<span>/ Per Visit</span></p>
+                            </div>
+                        </div>
+                        <!-- Table List -->
+                        <ul class="table-list">
+                            <li><i class="icofont icofont-ui-check"></i>Lorem ipsum dolor sit</li>
+                            <li><i class="icofont icofont-ui-check"></i>Cubitur sollicitudin fentum</li>
+                            <li class="cross"><i class="icofont icofont-ui-close"></i>Nullam interdum enim</li>
+                            <li class="cross"><i class="icofont icofont-ui-close"></i>Donec ultricies metus</li>
+                            <li class="cross"><i class="icofont icofont-ui-close"></i>Pellentesque eget nibh</li>
+                        </ul>
+                        <div class="table-bottom">
+                            <a class="btn" href="#">Book Now</a>
+                        </div>
+                        <!-- Table Bottom -->
+                    </div>
+                </div>
+                <!-- End Single Table-->
+                <!-- Single Table -->
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="single-table">
+                        <!-- Table Head -->
+                        <div class="table-head">
+                            <div class="icon">
+                                <i class="icofont icofont-tooth"></i>
+                            </div>
+                            <h4 class="title">Teeth Whitening</h4>
+                            <div class="price">
+                                <p class="amount">$299<span>/ Per Visit</span></p>
+                            </div>
+                        </div>
+                        <!-- Table List -->
+                        <ul class="table-list">
+                            <li><i class="icofont icofont-ui-check"></i>Lorem ipsum dolor sit</li>
+                            <li><i class="icofont icofont-ui-check"></i>Cubitur sollicitudin fentum</li>
+                            <li><i class="icofont icofont-ui-check"></i>Nullam interdum enim</li>
+                            <li class="cross"><i class="icofont icofont-ui-close"></i>Donec ultricies metus</li>
+                            <li class="cross"><i class="icofont icofont-ui-close"></i>Pellentesque eget nibh</li>
+                        </ul>
+                        <div class="table-bottom">
+                            <a class="btn" href="#">Book Now</a>
+                        </div>
+                        <!-- Table Bottom -->
+                    </div>
+                </div>
+                <!-- End Single Table-->
+                <!-- Single Table -->
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="single-table">
+                        <!-- Table Head -->
+                        <div class="table-head">
+                            <div class="icon">
+                                <i class="icofont-heart-beat"></i>
+                            </div>
+                            <h4 class="title">Heart Suggery</h4>
+                            <div class="price">
+                                <p class="amount">$399<span>/ Per Visit</span></p>
+                            </div>
+                        </div>
+                        <!-- Table List -->
+                        <ul class="table-list">
+                            <li><i class="icofont icofont-ui-check"></i>Lorem ipsum dolor sit</li>
+                            <li><i class="icofont icofont-ui-check"></i>Cubitur sollicitudin fentum</li>
+                            <li><i class="icofont icofont-ui-check"></i>Nullam interdum enim</li>
+                            <li><i class="icofont icofont-ui-check"></i>Donec ultricies metus</li>
+                            <li><i class="icofont icofont-ui-check"></i>Pellentesque eget nibh</li>
+                        </ul>
+                        <div class="table-bottom">
+                            <a class="btn" href="#">Book Now</a>
+                        </div>
+                        <!-- Table Bottom -->
+                    </div>
+                </div>
+                <!-- End Single Table-->
+            </div>
+        </div>
+    </section>
+    <!--/ End Pricing Table -->
+
+    <!-- Start clients -->
+    <div class="clients overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="owl-carousel clients-slider">
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client1.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client2.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client3.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client4.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client5.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client1.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client2.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client3.png') }}" alt="#">
+                        </div>
+                        <div class="single-clients">
+                            <img src="{{ url_for('static', filename='img/client4.png') }}" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Ens clients -->
+
+    <!-- Start Newsletter Area -->
+    <section class="newsletter section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-6  col-12">
+                    <!-- Start Newsletter Form -->
+                    <div class="subscribe-text ">
+                        <h6>Sign up for newsletter</h6>
+                        <p class="">Cu qui soleat partiendo urbanitas. Eum aperiri indoctum eu,<br> homero alterum.</p>
+                    </div>
+                    <!-- End Newsletter Form -->
+                </div>
+                <div class="col-lg-6  col-12">
+                    <!-- Start Newsletter Form -->
+                    <div class="subscribe-form ">
+                        <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                            <input name="EMAIL" placeholder="Your email address" class="common-input"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'"
+                                required="" type="email">
+                            <button class="btn">Subscribe</button>
+                        </form>
+                    </div>
+                    <!-- End Newsletter Form -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /End Newsletter Area -->
+
+    <!-- Footer Area -->
+    <footer id="footer" class="footer ">
+        <!-- Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-footer">
+                            <h2>About Us</h2>
+                            <p>Lorem ipsum dolor sit am consectetur adipisicing elit do eiusmod tempor incididunt ut
+                                labore dolore magna.</p>
+                            <!-- Social -->
+                            <ul class="social">
+                                <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                                <li><a href="#"><i class="icofont-google-plus"></i></a></li>
+                                <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                                <li><a href="#"><i class="icofont-vimeo"></i></a></li>
+                                <li><a href="#"><i class="icofont-pinterest"></i></a></li>
+                            </ul>
+                            <!-- End Social -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-footer f-link">
+                            <h2>Quick Links</h2>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a>
+                                        </li>
+                                        <li><a href="#services"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Services</a></li>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Our
+                                                Cases</a></li>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Other
+                                                Links</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Consuling</a></li>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Finance</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Testimonials</a></li>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>FAQ</a></li>
+                                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact
+                                                Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-footer">
+                            <h2>Open Hours</h2>
+                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit do eiusmod tempor incididunt.</p>
+                            <ul class="time-sidual">
+                                <li class="day">Monday - Fridayp <span>8.00-20.00</span></li>
+                                <li class="day">Saturday <span>9.00-18.30</span></li>
+                                <li class="day">Monday - Thusday <span>9.00-15.00</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-footer">
+                            <h2>Newsletter</h2>
+                            <p>subscribe to our newsletter to get allour news in your inbox.. Lorem ipsum dolor sit
+                                amet, consectetur adipisicing elit,</p>
+                            <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                                <input name="email" placeholder="Email Address" class="common-input"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'"
+                                    required="" type="email">
+                                <button class="button"><i class="icofont icofont-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Footer Top -->
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="copyright-content">
+                            <p>© Copyright 2018 | All Rights Reserved by <a href="" target="_blank">HackHustlers</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Copyright -->
+    </footer>
+    <!--/ End Footer Area -->
+
+    {% block content %}{% endblock %}
+
+    <!-- jquery Min JS -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- jquery Migrate JS -->
+    <script src="{{ url_for('static', filename='js/jquery-migrate-3.0.0.js') }}"></script>
+    <!-- jquery Ui JS -->
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <!-- Easing JS -->
+    <script src="{{ url_for('static', filename='js/easing.js') }}"></script>
+    <!-- Color JS -->
+    <script src="{{ url_for('static', filename='js/colors.js') }}"></script>
+    <!-- Popper JS -->
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap-datepicker.js') }}"></script>
+    <!-- Jquery Nav JS -->
+    <script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+    <!-- Slicknav JS -->
+    <script src="{{ url_for('static', filename='js/slicknav.min.js') }}"></script>
+    <!-- ScrollUp JS -->
+    <script src="{{ url_for('static', filename='js/jquery.scrollUp.min.js') }}"></script>
+    <!-- Niceselect JS -->
+    <script src="{{ url_for('static', filename='js/niceselect.js') }}"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="{{ url_for('static', filename='js/tilt.jquery.min.js') }}"></script>
+    <!-- Owl Carousel JS -->
+    <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
+    <!-- counterup JS -->
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <!-- Steller JS -->
+    <script src="{{ url_for('static', filename='js/steller.js') }}"></script>
+    <!-- Wow JS -->
+    <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+    <!-- Magnific Popup JS -->
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Add this script at the end of your index.html file -->
+
+    <script>
+        // Function to open the login modal
+        function openLoginModal() {
+            {% if 'user_id' in session %}
+            window.location.href = "{{ url_for('appointment') }}";
+            {% else %}
+            $('#loginModal').modal('show');
+            {% endif %}
+        }
+
+    </script>
+
+</body>
+
+</html>
